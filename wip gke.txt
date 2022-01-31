@@ -1,0 +1,189 @@
+kubectl run NAME --image = image [
+
+
+
+
+https://github.com/GoogleCloudPlatform/cloud-sdk-docker
+
+
+kubectl run sdk --image = gcr.io/google.com/cloudsdktool/cloud-sdk:latest
+
+
+docker run --rm --volumes-from gcloud-config gcr.io/google.com/cloudsdktool/cloud-sdk gcloud compute instances list --project your_project
+
+docker run gcr.io/google.com/cloudsdktool/cloud-sdk:260.0.0 gcloud version
+
+
+kubectl run 
+
+
+C:\Users\heman>gcloud container clusters get-credentials cluster --zone us-central1-c --project veerahemannthnag
+Fetching cluster endpoint and auth data.
+kubeconfig entry generated for cluster.
+
+
+
+C:\Users\heman>kubectl run sdk --image=gcr.io/google.com/cloudsdktool/cloud-sdk:latest
+pod/sdk created
+
+
+
+kubectl exec my-pod -- gcloud compute instances list
+
+kubectl delete pod unwanted --now  
+
+
+kubectl run -ti gcloud-config --image=gcr.io/google.com/cloudsdktool/cloud-sdk gcloud auth login
+
+
+
+kubectl run -ti gcloud-config --image=gcr.io/google.com/cloudsdktool/cloud-sdk gcloud auth login --update-adc
+
+
+NAME              STATUS   AGE
+default           Active   14m
+kube-node-lease   Active   14m
+kube-public       Active   14m
+kube-system       Active   14m
+
+C:\Users\heman>kubectl get pods -n default
+NAME   READY   STATUS              RESTARTS   AGE
+sdk    0/1     ContainerCreating   0          110s
+
+
+kubectl run -i --tty busybox --image=gcr.io/google.com/cloudsdktool/cloud-sdk -- sh 
+
+
+--image=gcr.io/google.com/cloudsdktool/cloud-sdk
+C:\Users\heman>kubectl run -i --tty sdk2 --image=gcr.io/google.com/cloudsdktool/cloud-sdk -- gcloud compute instances list
+
+
+Working
+C:\Users\heman>kubectl run -i --tty sdk --image=gcr.io/google.com/cloudsdktool/cloud-sdk -- gcloud compute instances list
+If you don't see a command prompt, try pressing enter.
+NAME                                    ZONE           MACHINE_TYPE  PREEMPTIBLE  INTERNAL_IP  EXTERNAL_IP   STATUS
+gke-cluster-default-pool-7671ed6f-s0fw  us-central1-c  e2-small                   10.128.0.53  34.133.74.23  RUNNING
+Session ended, resume using 'kubectl attach sdk -c sdk -i -t' command when the pod is running
+
+
+
+
+C:\Users\heman>kubectl get pods
+NAME            READY   STATUS      RESTARTS   AGE
+gcloud-config   1/1     Running     1          34m
+hello-hd7bz     0/1     Completed   0          20m
+
+C:\Users\heman>kubectl exec gcloud-config -- ls /
+bin
+boot
+dev
+etc
+home
+lib
+lib64
+media
+mnt
+opt
+proc
+root
+run
+sbin
+srv
+sys
+tmp
+usr
+var
+
+C:\Users\heman>kubectl exec --stdin --tty gcloud-config -- /bin/sh
+# ls
+bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
+# gcloud components list
+
+
+docker run gcr.io/google.com/cloudsdktool/cloud-sdk:260.0.0 gcloud version
+
+kubectl run sdk --image=gcr.io/google.com/cloudsdktool/cloud-sdk:260.0.0 -- gcloud version
+kubectl run sdk --image=gcr.io/google.com/cloudsdktool/cloud-sdk:260.0.0 -- gcloud compute instances list
+
+
+
+
+
+gcloud beta container --project "veerahemannthnag" clusters create "cluster" --zone "asia-south1-a" --no-enable-basic-auth --cluster-version "1.21.5-gke.1302" --release-channel "regular" --machine-type "e2-small" --image-type "COS_CONTAINERD" --disk-type "pd-standard" --disk-size "100" --metadata disable-legacy-endpoints=true --scopes "https://www.googleapis.com/auth/cloud-platform" --max-pods-per-node "110" --num-nodes "1" --logging=SYSTEM,WORKLOAD --monitoring=SYSTEM --enable-ip-alias --network "projects/veerahemannthnag/global/networks/default" --subnetwork "projects/veerahemannthnag/regions/asia-south1/subnetworks/default" --no-enable-intra-node-visibility --default-max-pods-per-node "110" --no-enable-master-authorized-networks --addons HorizontalPodAutoscaling,HttpLoadBalancing,GcePersistentDiskCsiDriver --enable-autoupgrade --enable-autorepair --max-surge-upgrade 1 --max-unavailable-upgrade 0 --enable-shielded-nodes --node-locations "asia-south1-a"
+
+gcloud beta container --project "veerahemannthnag" clusters create "cluster" --zone "asia-south1-a" --no-enable-basic-auth --cluster-version "1.21.5-gke.1302" --release-channel "regular" --machine-type "e2-small" --image-type "COS_CONTAINERD" --disk-type "pd-standard" --disk-size "100" --metadata disable-legacy-endpoints=true --scopes "https://www.googleapis.com/auth/cloud-platform" --max-pods-per-node "110" --num-nodes "3" --logging=SYSTEM,WORKLOAD --monitoring=SYSTEM --enable-ip-alias --network "projects/veerahemannthnag/global/networks/default" --subnetwork "projects/veerahemannthnag/regions/asia-south1/subnetworks/default" --no-enable-intra-node-visibility --default-max-pods-per-node "110" --no-enable-master-authorized-networks --addons HorizontalPodAutoscaling,HttpLoadBalancing,GcePersistentDiskCsiDriver --enable-autoupgrade --enable-autorepair --max-surge-upgrade 1 --max-unavailable-upgrade 0 --enable-shielded-nodes --node-locations "asia-south1-a"
+
+
+
+
+gcloud auth configure-docker us-central1-docker.pkg.dev
+
+
+
+gcloud auth configure-docker
+
+
+C:\Users\heman>docker images
+REPOSITORY                                 TAG       IMAGE ID       CREATED      SIZE
+google/cloud-sdk                           latest    ca2633cf6a18   5 days ago   2.6GB
+gcr.io/google.com/cloudsdktool/cloud-sdk   latest    ca2633cf6a18   5 days ago   2.6GB
+
+C:\Users\heman>docker tag google/cloud-sdk gcr.io/veerahemannthnag/google/cloud-sdk
+
+C:\Users\heman>docker push gcr.io/veerahemannthnag/google/cloud-sdk
+Using default tag: latest
+The push refers to repository [gcr.io/veerahemannthnag/google/cloud-sdk]
+b4df6ef5dcac: Preparing
+7eed6aef97be: Preparing
+7a3f6d74dfeb: Preparing
+7360a9d8b5a9: Preparing
+512c16f99e7b: Preparing
+330713b7d360: Waiting
+ba4fd9afe087: Waiting
+dc4f2875405c: Waiting
+unauthorized: You don't have the needed permissions to perform this operation, and you may have invalid credentials. To authenticate your request, follow the steps in: https://cloud.google.com/container-registry/docs/advanced-authentication
+
+C:\Users\heman>gcloud auth configure-docker
+Adding credentials for all GCR repositories.
+WARNING: A long list of credential helpers may cause delays running 'docker build'. We recommend passing the registry name to configure only the registry you are using.
+After update, the following will be written to your Docker config file located at [C:\Users\heman\.docker\config.json]:
+ {
+  "credHelpers": {
+    "gcr.io": "gcloud",
+    "us.gcr.io": "gcloud",
+    "eu.gcr.io": "gcloud",
+    "asia.gcr.io": "gcloud",
+    "staging-k8s.gcr.io": "gcloud",
+    "marketplace.gcr.io": "gcloud"
+  }
+}
+
+Do you want to continue (Y/n)?  y
+
+Docker configuration file updated.
+
+C:\Users\heman>docker push gcr.io/veerahemannthnag/google/cloud-sdk
+Using default tag: latest
+The push refers to repository [gcr.io/veerahemannthnag/google/cloud-sdk]
+b4df6ef5dcac: Pushed
+7eed6aef97be: Pushed
+7a3f6d74dfeb: Pushed
+7360a9d8b5a9: Pushed
+512c16f99e7b: Pushed
+330713b7d360: Pushed
+ba4fd9afe087: Pushed
+dc4f2875405c: Pushed
+latest: digest: sha256:5319d17c3c2b67d00c38cfa59731a6890832af6158ce04ba4cb0cc8524472aaf size: 2003
+
+C:\Users\heman>
+
+
+gcloud beta container --project "veerahemannthnag" clusters create "my-first-cluster-1" --zone "us-central1-c" --no-enable-basic-auth --cluster-version "1.22.3-gke.1500" --release-channel "rapid" --machine-type "g1-small" --image-type "COS_CONTAINERD" --disk-type "pd-standard" --disk-size "32" --metadata disable-legacy-endpoints=true --scopes "https://www.googleapis.com/auth/devstorage.read_only","https://www.googleapis.com/auth/logging.write","https://www.googleapis.com/auth/monitoring","https://www.googleapis.com/auth/servicecontrol","https://www.googleapis.com/auth/service.management.readonly","https://www.googleapis.com/auth/trace.append" --max-pods-per-node "110" --num-nodes "3" --enable-ip-alias --network "projects/veerahemannthnag/global/networks/default" --subnetwork "projects/veerahemannthnag/regions/us-central1/subnetworks/default" --no-enable-intra-node-visibility --default-max-pods-per-node "110" --no-enable-master-authorized-networks --addons HorizontalPodAutoscaling,HttpLoadBalancing,GcePersistentDiskCsiDriver --enable-autoupgrade --enable-autorepair --max-surge-upgrade 1 --max-unavailable-upgrade 0 --enable-shielded-nodes --node-locations "us-central1-c"
+
+
+
+
+
+
+
+
