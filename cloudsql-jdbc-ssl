@@ -1,3 +1,5 @@
+SET CLASSPATH=C:\Users\heman\Desktop\Tech\postgresql-42.3.3.jar
+
 gcloud sql ssl client-certs create mycert client-key.pem --instance=postgresql1
 
 gcloud sql ssl client-certs describe mycert --instance=postgresql1 --format="value(cert)" > client-cert.pem
