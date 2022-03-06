@@ -1,0 +1,11 @@
+gcloud sql ssl client-certs create mycert client-key.pem --instance=postgresql1
+
+gcloud sql ssl client-certs describe mycert --instance=postgresql1 --format="value(cert)" > client-cert.pem
+
+gcloud sql instances describe postgresql1 --format="value(serverCaCert.cert)" > server-ca.pem
+
+openssl pkcs8 -topk8 -inform PEM -in client-key.pem -outform DER -out client-key.pk8 -nocrypt 
+
+"jdbc:postgresql://34.100.140.6:5432/testdb?ssl=true&sslmode=verify-ca&sslrootcert=server-ca.pem&sslcert=client-cert.pem&sslkey=client-key.pk8"
+
+
